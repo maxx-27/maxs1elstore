@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard Admin - Kelola toko app premium MaxShop">
+    <title>Dashboard Admin - MaxShop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <a href="index.html" class="sidebar-brand">
+                <div class="brand-icon">⚡</div>
+                <span>MaxShop</span>
+            </a>
+            <ul class="sidebar-nav">
+                <li><a href="#" class="active" onclick="switchPanel('dashboard', this)">
+                        <span class="nav-icon">📊</span> Dashboard
+                    </a></li>
+                <li><a href="#" onclick="switchPanel('products', this)">
+                        <span class="nav-icon">📱</span> App Premium
+                    </a></li>
+                <li><a href="#" onclick="switchPanel('accounts', this)">
+                        <span class="nav-icon">🔑</span> Data Akun
+                    </a></li>
+                <li><a href="#" onclick="switchPanel('orders', this)">
+                        <span class="nav-icon">🧾</span> Pesanan
+                    </a></li>
+                <li><a href="#" onclick="switchPanel('api', this)">
+                        <span class="nav-icon">⚙️</span> API Setting
+                    </a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button class="btn btn-secondary" style="width:100%;" onclick="adminLogout()">
+                    🚪 Keluar
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="admin-main">
+            <div class="admin-header">
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <button class="menu-toggle" onclick="toggleAdminSidebar()" style="display:none;"
+                        id="sidebarToggle">☰</button>
+                    <h1 id="pageTitle">Dashboard</h1>
+                </div>
+                <div class="admin-user">
+                    <span>Admin</span>
+                    <div class="admin-avatar">M</div>
+                </div>
+            </div>
+
+            <!-- ===== DASHBOARD PANEL ===== -->
+            <div class="admin-panel active" id="panel-dashboard">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">📱</div>
+                        <div class="stat-value" id="statProducts">0</div>
+                        <div class="stat-label">Total App Premium</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">🔑</div>
+                        <div class="stat-value" id="statAccounts">0</div>
+                        <div class="stat-label">Total Stok Akun</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">💰</div>
+                        <div class="stat-value" id="statRevenue">Rp 0</div>
+                        <div class="stat-label">Total Pendapatan</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon yellow">🧾</div>
+                        <div class="stat-value" id="statOrders">0</div>
+                        <div class="stat-label">Total Pesanan</div>
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <h3>Pesanan Terbaru</h3>
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Pembeli</th>
+                                    <th>Total</th>
+                                    <th>Metode</th>
+                                    <th>Status</th>
+                                    <th>Tanggal</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentOrdersTable">
+                                <tr>
+                                    <td colspan="6" style="text-align:center;color:var(--text-muted);padding:24px;">
+                                        Belum ada pesanan</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== APP PREMIUM PANEL ===== -->
+            <div class="admin-panel" id="panel-products">
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <h3>Daftar App Premium</h3>
+                        <button class="btn btn-primary btn-sm" onclick="openProductModal()">+ Tambah App</button>
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>App</th>
+                                    <th>Harga</th>
+                                    <th>Durasi</th>
+                                    <th>Stok Akun</th>
+                                    <th>Deskripsi</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsTable">
+                                <tr>
+                                    <td colspan="6" style="text-align:center;color:var(--text-muted);padding:24px;">
+                                        Belum ada app premium</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== DATA AKUN PANEL ===== -->
+            <div class="admin-panel" id="panel-accounts">
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <h3>Tambah Data Akun</h3>
+                    </div>
+                    <p style="color:var(--text-secondary);font-size:0.88rem;margin-bottom:20px;">
+                        Pilih app premium, masukkan email/password akun. Stok otomatis bertambah.<br>
+                        Akun dikirim otomatis ke pembeli setelah pembayaran berhasil.
+                    </p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+                        <div class="form-group">
+                            <label for="accProduct">Pilih App Premium</label>
+                            <select id="accProduct">
+                                <option value="">-- Pilih App --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <button class="btn btn-primary" onclick="addSingleAccount()" style="width:100%;">+ Tambah
+                                Akun</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="accEmail">Email / Username</label>
+                            <input type="text" id="accEmail" placeholder="email@contoh.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="accPassword">Password</label>
+                            <input type="text" id="accPassword" placeholder="password123">
+                        </div>
+                    </div>
+
+                    <!-- Bulk Add -->
+                    <div
+                        style="margin-bottom:24px;padding:20px;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius);">
+                        <h4 style="font-size:0.92rem;margin-bottom:12px;">📋 Tambah Akun Massal</h4>
+                        <p style="color:var(--text-muted);font-size:0.78rem;margin-bottom:12px;">
+                            Format: <code
+                                style="background:rgba(255,255,255,0.08);padding:2px 8px;border-radius:4px;">email|password</code>
+                            (satu per baris)
+                        </p>
+                        <div class="form-group">
+                            <label for="bulkProduct">Pilih App Premium</label>
+                            <select id="bulkProduct">
+                                <option value="">-- Pilih App --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bulkAccounts">Data Akun (satu per baris)</label>
+                            <textarea id="bulkAccounts" rows="5"
+                                placeholder="user1@email.com|password1&#10;user2@email.com|password2&#10;user3@email.com|password3"></textarea>
+                        </div>
+                        <button class="btn btn-success" onclick="addBulkAccounts()">📋 Tambah Akun Massal</button>
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <h3>Stok Akun per App</h3>
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>App</th>
+                                    <th>Stok Akun</th>
+                                    <th>Detail</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="accountStockTable">
+                                <tr>
+                                    <td colspan="4" style="text-align:center;color:var(--text-muted);padding:24px;">
+                                        Belum ada data akun</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== ORDERS PANEL ===== -->
+            <div class="admin-panel" id="panel-orders">
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <h3>Semua Pesanan</h3>
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Pembeli</th>
+                                    <th>Email</th>
+                                    <th>Item</th>
+                                    <th>Total</th>
+                                    <th>Metode</th>
+                                    <th>Status</th>
+                                    <th>Tanggal</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allOrdersTable">
+                                <tr>
+                                    <td colspan="8" style="text-align:center;color:var(--text-muted);padding:24px;">
+                                        Belum ada pesanan</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== API SETTING PANEL ===== -->
+            <div class="admin-panel" id="panel-api">
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <h3>⚙️ Pengaturan API</h3>
+                    </div>
+                    <p style="color:var(--text-secondary);font-size:0.88rem;margin-bottom:24px;">
+                        Konfigurasi API untuk integrasi payment gateway dan notifikasi otomatis.
+                    </p>
+
+                    <form id="apiSettingsForm" onsubmit="return saveApiSettingsForm(event)">
+                        <div style="margin-bottom:28px;">
+                            <h4
+                                style="font-size:0.92rem;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border-glass);">
+                                💳 Payment Gateway API</h4>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                                <div class="form-group">
+                                    <label for="apiKey">API Key</label>
+                                    <input type="text" id="apiKey" placeholder="Masukkan API Key">
+                                </div>
+                                <div class="form-group">
+                                    <label for="apiSecret">API Secret</label>
+                                    <input type="password" id="apiSecret" placeholder="Masukkan API Secret">
+                                </div>
+                                <div class="form-group">
+                                    <label for="webhookUrl">Webhook URL</label>
+                                    <input type="text" id="webhookUrl" placeholder="https://domain.com/webhook">
+                                </div>
+                                <div class="form-group">
+                                    <label for="paymentMode">Mode</label>
+                                    <select id="paymentMode">
+                                        <option value="sandbox">🧪 Sandbox (Testing)</option>
+                                        <option value="production">🚀 Production (Live)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top:8px;">
+                                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                                    <input type="checkbox" id="autoConfirm" checked
+                                        style="width:18px;height:18px;accent-color:var(--accent-1);">
+                                    <span>Konfirmasi Pembayaran Otomatis</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom:28px;">
+                            <h4
+                                style="font-size:0.92rem;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border-glass);">
+                                🔔 Notifikasi</h4>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                                <div class="form-group">
+                                    <label for="notifEmail">Email Notifikasi</label>
+                                    <input type="email" id="notifEmail" placeholder="admin@maxshop.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="notifTelegram">Username Telegram</label>
+                                    <input type="text" id="notifTelegram" placeholder="@username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="telegramBotToken">Telegram Bot Token</label>
+                                    <input type="text" id="telegramBotToken" placeholder="123456:ABCdef...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="telegramChatId">Telegram Chat ID</label>
+                                    <input type="text" id="telegramChatId" placeholder="123456789">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex;gap:12px;">
+                            <button type="submit" class="btn btn-primary">💾 Simpan Pengaturan</button>
+                            <button type="button" class="btn btn-secondary" onclick="loadApiSettingsForm()">🔄
+                                Reset</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="admin-section" style="margin-top:24px;">
+                    <div class="admin-section-header">
+                        <h3>📡 Status API</h3>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+                        <div
+                            style="background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-sm);padding:16px;text-align:center;">
+                            <div style="font-size:1.5rem;margin-bottom:8px;">💳</div>
+                            <div style="font-weight:600;font-size:0.88rem;margin-bottom:4px;">Payment Gateway</div>
+                            <span class="status-badge pending" id="apiStatusPayment">Belum Dikonfigurasi</span>
+                        </div>
+                        <div
+                            style="background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-sm);padding:16px;text-align:center;">
+                            <div style="font-size:1.5rem;margin-bottom:8px;">📧</div>
+                            <div style="font-weight:600;font-size:0.88rem;margin-bottom:4px;">Email Notifikasi</div>
+                            <span class="status-badge pending" id="apiStatusEmail">Belum Dikonfigurasi</span>
+                        </div>
+                        <div
+                            style="background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-sm);padding:16px;text-align:center;">
+                            <div style="font-size:1.5rem;margin-bottom:8px;">📱</div>
+                            <div style="font-weight:600;font-size:0.88rem;margin-bottom:4px;">Telegram Bot</div>
+                            <span class="status-badge pending" id="apiStatusTelegram">Belum Dikonfigurasi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- PRODUCT MODAL -->
+    <div class="admin-modal" id="productModal">
+        <div class="admin-modal-content">
+            <h3 id="productModalTitle">Tambah App Premium Baru</h3>
+            <form id="productForm" onsubmit="return saveProduct(event)">
+                <input type="hidden" id="editProductId" value="">
+                <div class="form-group">
+                    <label for="prodName">Nama App</label>
+                    <input type="text" id="prodName" placeholder="Contoh: Spotify Premium" required>
+                </div>
+                <div class="form-group">
+                    <label for="prodPrice">Harga (Rp)</label>
+                    <input type="number" id="prodPrice" placeholder="Contoh: 15000" required min="0">
+                </div>
+                <div class="form-group">
+                    <label for="prodDuration">Durasi</label>
+                    <input type="text" id="prodDuration" placeholder="Contoh: 1 Bulan" required>
+                </div>
+                <div class="form-group">
+                    <label for="prodDesc">Deskripsi</label>
+                    <textarea id="prodDesc" placeholder="Deskripsi singkat app premium" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="prodImage">URL Logo / Gambar</label>
+                    <input type="text" id="prodImage" placeholder="https://... atau kosongkan untuk default">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeProductModal()">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ACCOUNT DETAIL MODAL -->
+    <div class="admin-modal" id="accountDetailModal">
+        <div class="admin-modal-content" style="max-width:600px;">
+            <h3 id="accountDetailTitle">Detail Akun</h3>
+            <div id="accountDetailContent"></div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeAccountDetailModal()">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/app.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

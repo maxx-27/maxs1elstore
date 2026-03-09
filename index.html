@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="MaxShop - Jual Beli Akun Apps Premium Murah & Terpercaya. Spotify, Netflix, YouTube Premium, dan lainnya.">
+  <title>MaxShop - Toko App Premium #1</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">⚡</div>
+        MaxShop
+      </a>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <ul class="navbar-links" id="navLinks">
+        <li><a href="index.html" class="active">Beranda</a></li>
+        <li><a href="#products">App Premium</a></li>
+        <li><a href="admin.html">Admin</a></li>
+        <li><a href="#" class="cart-btn" onclick="openCart()">
+            🛒 Keranjang
+            <span class="cart-badge" id="cartBadge">0</span>
+          </a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>App Premium Murah,<br>Langsung Aktif ⚡</h1>
+      <p>Beli akun premium Spotify, Netflix, YouTube, Canva, dan lainnya. Bayar mudah via QRIS, transfer bank, atau
+        e-wallet. Akun dikirim instan!</p>
+      <div class="hero-badges">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          Proses Otomatis 24/7
+        </div>
+        <div class="badge">🔒 Pembayaran Aman</div>
+        <div class="badge">⚡ Akun Instan</div>
+        <div class="badge">💎 Harga Termurah</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="container">
+      <div class="section-title">
+        <h2>📱 Katalog App Premium</h2>
+        <p>Pilih aplikasi premium favoritmu, bayar, dan langsung terima data akun!</p>
+      </div>
+      <div class="products-grid" id="productsGrid"></div>
+    </div>
+  </section>
+
+  <!-- CART OVERLAY -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+  <!-- CART SIDEBAR -->
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>🛒 Keranjang</h3>
+      <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total</span>
+        <span class="total-price" id="cartTotal">Rp 0</span>
+      </div>
+      <a href="checkout.html" class="btn btn-primary" id="checkoutBtn" onclick="return canCheckout()">Checkout Sekarang
+        →</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 MaxShop — Toko App Premium #1 Indonesia 🇮🇩</p>
+    </div>
+  </footer>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="js/app.js"></script>
+</body>
+
+</html>
