@@ -257,22 +257,22 @@
                         <h3>⚙️ Pengaturan API</h3>
                     </div>
                     <p style="color:var(--text-secondary);font-size:0.88rem;margin-bottom:24px;">
-                        Konfigurasi API untuk integrasi payment gateway dan notifikasi otomatis.
+                        Konfigurasi API TokoPay untuk integrasi payment gateway dan notifikasi otomatis.
                     </p>
 
                     <form id="apiSettingsForm" onsubmit="return saveApiSettingsForm(event)">
                         <div style="margin-bottom:28px;">
                             <h4
                                 style="font-size:0.92rem;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border-glass);">
-                                💳 Payment Gateway API</h4>
+                                💳 TokoPay Payment Gateway</h4>
                             <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
                                 <div class="form-group">
-                                    <label for="apiKey">API Key</label>
-                                    <input type="text" id="apiKey" placeholder="Masukkan API Key">
+                                    <label for="apiKey">Merchant ID</label>
+                                    <input type="text" id="apiKey" placeholder="Contoh: M20230422XXXX26949756">
                                 </div>
                                 <div class="form-group">
-                                    <label for="apiSecret">API Secret</label>
-                                    <input type="password" id="apiSecret" placeholder="Masukkan API Secret">
+                                    <label for="apiSecret">Secret Key</label>
+                                    <input type="password" id="apiSecret" placeholder="Masukkan Secret Key TokoPay">
                                 </div>
                                 <div class="form-group">
                                     <label for="webhookUrl">Webhook URL</label>
@@ -335,7 +335,7 @@
                         <div
                             style="background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-sm);padding:16px;text-align:center;">
                             <div style="font-size:1.5rem;margin-bottom:8px;">💳</div>
-                            <div style="font-weight:600;font-size:0.88rem;margin-bottom:4px;">Payment Gateway</div>
+                            <div style="font-weight:600;font-size:0.88rem;margin-bottom:4px;">TokoPay</div>
                             <span class="status-badge pending" id="apiStatusPayment">Belum Dikonfigurasi</span>
                         </div>
                         <div

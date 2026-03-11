@@ -70,9 +70,9 @@ function loadDashboard() {
   }
 
   const methodNames = {
-    qris: 'QRIS',
-    bca: 'BCA', bni: 'BNI', mandiri: 'Mandiri', bri: 'BRI',
-    gopay: 'GoPay', ovo: 'OVO', dana: 'DANA', shopeepay: 'ShopeePay'
+    QRISREALTIME: 'QRIS', QRIS: 'QRIS',
+    BCAVA: 'BCA VA', BNIVA: 'BNI VA', BRIVA: 'BRI VA', MANDIRIVA: 'Mandiri VA',
+    GOPAY: 'GoPay', OVO: 'OVO', DANA: 'DANA', SHOPEEPAY: 'ShopeePay'
   };
 
   tbody.innerHTML = orders.slice(0, 5).map(order => {
@@ -147,9 +147,9 @@ function loadOrdersTable() {
   }
 
   const methodNames = {
-    qris: 'QRIS',
-    bca: 'BCA', bni: 'BNI', mandiri: 'Mandiri', bri: 'BRI',
-    gopay: 'GoPay', ovo: 'OVO', dana: 'DANA', shopeepay: 'ShopeePay'
+    QRISREALTIME: 'QRIS', QRIS: 'QRIS',
+    BCAVA: 'BCA VA', BNIVA: 'BNI VA', BRIVA: 'BRI VA', MANDIRIVA: 'Mandiri VA',
+    GOPAY: 'GoPay', OVO: 'OVO', DANA: 'DANA', SHOPEEPAY: 'ShopeePay'
   };
 
   tbody.innerHTML = orders.map(order => {

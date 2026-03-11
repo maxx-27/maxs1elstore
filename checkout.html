@@ -72,8 +72,9 @@
                     <div class="checkout-section">
                         <h3>💳 Metode Pembayaran</h3>
                         <div class="payment-methods" id="paymentMethods">
-                            <!-- QRIS -->
-                            <div class="payment-method qris-method" data-method="qris" onclick="selectPayment(this)">
+                            <!-- QRIS (TokoPay: QRISREALTIME) -->
+                            <div class="payment-method qris-method" data-method="QRISREALTIME"
+                                onclick="selectPayment(this)">
                                 <span class="pm-icon">📲</span>
                                 <div>
                                     <div style="font-weight:700;font-size:0.95rem;">QRIS</div>
@@ -81,58 +82,58 @@
                                         E-Wallet</div>
                                 </div>
                             </div>
-                            <!-- Banks -->
-                            <div class="payment-method" data-method="bca" onclick="selectPayment(this)">
+                            <!-- Virtual Account Banks -->
+                            <div class="payment-method" data-method="BCAVA" onclick="selectPayment(this)">
                                 <span class="pm-icon">🏦</span>
                                 <div>
                                     <div style="font-weight:600;">BCA</div>
-                                    <div style="font-size:0.72rem;color:var(--text-muted)">Transfer Bank</div>
+                                    <div style="font-size:0.72rem;color:var(--text-muted)">Virtual Account</div>
                                 </div>
                             </div>
-                            <div class="payment-method" data-method="bni" onclick="selectPayment(this)">
+                            <div class="payment-method" data-method="BNIVA" onclick="selectPayment(this)">
                                 <span class="pm-icon">🏦</span>
                                 <div>
                                     <div style="font-weight:600;">BNI</div>
-                                    <div style="font-size:0.72rem;color:var(--text-muted)">Transfer Bank</div>
+                                    <div style="font-size:0.72rem;color:var(--text-muted)">Virtual Account</div>
                                 </div>
                             </div>
-                            <div class="payment-method" data-method="mandiri" onclick="selectPayment(this)">
-                                <span class="pm-icon">🏦</span>
-                                <div>
-                                    <div style="font-weight:600;">Mandiri</div>
-                                    <div style="font-size:0.72rem;color:var(--text-muted)">Transfer Bank</div>
-                                </div>
-                            </div>
-                            <div class="payment-method" data-method="bri" onclick="selectPayment(this)">
+                            <div class="payment-method" data-method="BRIVA" onclick="selectPayment(this)">
                                 <span class="pm-icon">🏦</span>
                                 <div>
                                     <div style="font-weight:600;">BRI</div>
-                                    <div style="font-size:0.72rem;color:var(--text-muted)">Transfer Bank</div>
+                                    <div style="font-size:0.72rem;color:var(--text-muted)">Virtual Account</div>
+                                </div>
+                            </div>
+                            <div class="payment-method" data-method="MANDIRIVA" onclick="selectPayment(this)">
+                                <span class="pm-icon">🏦</span>
+                                <div>
+                                    <div style="font-weight:600;">Mandiri</div>
+                                    <div style="font-size:0.72rem;color:var(--text-muted)">Virtual Account</div>
                                 </div>
                             </div>
                             <!-- E-Wallets -->
-                            <div class="payment-method" data-method="gopay" onclick="selectPayment(this)">
+                            <div class="payment-method" data-method="GOPAY" onclick="selectPayment(this)">
                                 <span class="pm-icon">📱</span>
                                 <div>
                                     <div style="font-weight:600;">GoPay</div>
                                     <div style="font-size:0.72rem;color:var(--text-muted)">E-Wallet</div>
                                 </div>
                             </div>
-                            <div class="payment-method" data-method="ovo" onclick="selectPayment(this)">
+                            <div class="payment-method" data-method="OVO" onclick="selectPayment(this)">
                                 <span class="pm-icon">📱</span>
                                 <div>
                                     <div style="font-weight:600;">OVO</div>
                                     <div style="font-size:0.72rem;color:var(--text-muted)">E-Wallet</div>
                                 </div>
                             </div>
-                            <div class="payment-method" data-method="dana" onclick="selectPayment(this)">
+                            <div class="payment-method" data-method="DANA" onclick="selectPayment(this)">
                                 <span class="pm-icon">📱</span>
                                 <div>
                                     <div style="font-weight:600;">DANA</div>
                                     <div style="font-size:0.72rem;color:var(--text-muted)">E-Wallet</div>
                                 </div>
                             </div>
-                            <div class="payment-method" data-method="shopeepay" onclick="selectPayment(this)">
+                            <div class="payment-method" data-method="SHOPEEPAY" onclick="selectPayment(this)">
                                 <span class="pm-icon">📱</span>
                                 <div>
                                     <div style="font-weight:600;">ShopeePay</div>
